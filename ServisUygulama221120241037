@@ -1,0 +1,63 @@
+using System;
+
+namespace ServisRezervasyonu
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const int koltukSayisi = 20; 
+            int toplamOgrenci = 0; 
+
+            Console.WriteLine("Servis rezervasyon sistemi");
+            Console.WriteLine($"Serviste toplam {koltukSayisi} koltuk bulunmaktadır.");
+
+            while (toplamOgrenci < koltukSayisi)
+            {
+                
+                Console.WriteLine($"Kalan koltuk sayısı: {koltukSayisi - toplamOgrenci}");
+                Console.WriteLine($"Şu ana kadar eklenen toplam öğrenci sayısı: {toplamOgrenci}");
+
+                
+                Console.Write("Kaç öğrenci eklemek istiyorsunuz? (Çıkmak için 0 girin): ");
+                int eklenenOgrenci;
+
+                
+                while (!int.TryParse(Console.ReadLine(), out eklenenOgrenci) || eklenenOgrenci < 0)
+                {
+                    Console.WriteLine("Geçerli bir pozitif tam sayı giriniz!");
+                    Console.Write("Kaç öğrenci eklemek istiyorsunuz?: ");
+                }
+
+                
+                if (eklenenOgrenci == 0)
+                {
+                    Console.WriteLine("Rezervasyon sistemi kapatılıyor...");
+                    break;
+                }
+
+                
+                if (toplamOgrenci + eklenenOgrenci <= koltukSayisi)
+                {
+                    toplamOgrenci += eklenenOgrenci;
+                    Console.WriteLine($"{eklenenOgrenci} öğrenci başarıyla eklendi.\n");
+                }
+                else
+                {
+                    Console.WriteLine($"Hata: Eklemek istediğiniz öğrenci sayısı ({eklenenOgrenci}) kapasiteyi aşıyor!");
+                    Console.WriteLine($"Maksimum ekleyebileceğiniz öğrenci sayısı: {koltukSayisi - toplamOgrenci}");
+                }
+            }
+
+            
+            if (toplamOgrenci == koltukSayisi)
+            {
+                Console.WriteLine("Servis tamamen doldu. Daha fazla rezervasyon yapılamaz.");
+            }
+
+            Console.WriteLine($"Toplam {toplamOgrenci} öğrenci servise kayıt edildi.");
+            Console.WriteLine("Sistemi kapatmak için bir tuşa basın...");
+            Console.ReadKey();
+        }
+    }
+}
